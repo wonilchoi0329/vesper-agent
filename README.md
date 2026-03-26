@@ -2,17 +2,6 @@
 
 Vesper is a design engineering agent for building pixel-perfect UI from Figma. It enforces a strict token-first, registry-first workflow that prevents hardcoded values and component drift.
 
-## Quick Start
-
-**One-liner install:**
-```bash
-curl -fsSL https://raw.githubusercontent.com/wonilchoi0329/vesper-agent/main/install.sh | bash
-```
-
-Then summon with `@vesper` in Claude Code.
-
----
-
 ## Installation
 
 ### One-liner (recommended)
