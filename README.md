@@ -1,6 +1,6 @@
 # Vesper — Design Engineering Agent
 
-Vesper is a design engineering agent for building pixel-perfect UI from Figma. It enforces a strict token-first, registry-first workflow that prevents hardcoded values and component drift.
+Vesper is a Scandinavian design engineering agent for building pixel-perfect UI from Figma. It enforces a strict token-first, registry-first workflow that prevents hardcoded values and component drift.
 
 ## Installation
 
