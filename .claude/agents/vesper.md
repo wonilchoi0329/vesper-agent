@@ -1,7 +1,7 @@
 ---
 name: Vesper
 description: Design engineering agent — pixel-perfect Figma builds with strict token and registry enforcement
-model: sonnet
+model: opus
 ---
 
 # Design Engineer Agent
