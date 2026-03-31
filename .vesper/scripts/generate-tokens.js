@@ -98,6 +98,18 @@ function toCssVar(dotPath) {
   return '--' + dotPath.replace(/\./g, '-')
 }
 
+// Dimension tokens (spacing, radius, stroke, fontSize, lineHeight) are stored as
+// raw numbers in the DTCG source but need `px` units in CSS output.
+// Font-weight and font-family are the only numeric tokens that must stay unitless.
+const NON_DIMENSION_RE = /fontWeight|font-weight|fontFamily|font-family/i
+
+function appendUnitIfNeeded(varName, value) {
+  if (!NON_DIMENSION_RE.test(varName) && /^-?\d+(\.\d+)?$/.test(value)) {
+    return value + 'px'
+  }
+  return value
+}
+
 // ─── Collect CSS vars ─────────────────────────────────────────────────────────
 
 const cssEntries = []
@@ -112,10 +124,11 @@ function collectCssVars(obj, prefix = '', sourceName = '') {
       const raw = val.$value
       if (typeof raw === 'object' && raw !== null) {
         for (const [prop, propVal] of Object.entries(raw)) {
-          cssEntries.push({ varName: `${varName}-${prop}`, value: resolveValue(String(propVal)), source: sourceName })
+          const fullVar = `${varName}-${prop}`
+          cssEntries.push({ varName: fullVar, value: appendUnitIfNeeded(fullVar, resolveValue(String(propVal))), source: sourceName })
         }
       } else {
-        cssEntries.push({ varName, value: resolveValue(String(raw)), source: sourceName })
+        cssEntries.push({ varName, value: appendUnitIfNeeded(varName, resolveValue(String(raw))), source: sourceName })
       }
     } else if (val && typeof val === 'object') {
       collectCssVars(val, dotPath, sourceName)
